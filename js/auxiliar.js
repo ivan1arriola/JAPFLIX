@@ -2,9 +2,6 @@
 const URL = 'https://japceibal.github.io/japflix_api/movies-data.json';
 
 
-//--------------Elementos-HTML------------------------------
-const inputBuscar = document.getElementById('inputBuscar');
-const btnBuscar = document.getElementById('btnBuscar');
 
 //--------------Funciones Auxiliares------------------------
 
@@ -12,6 +9,35 @@ const btnBuscar = document.getElementById('btnBuscar');
 async function getData(url) {
     return fetch(url)
   .then(response => response.json())
-  .then(data => console.log(data));
+  
+
 }
 
+function filtrar(datos,titulo){
+  return datos.filter(function(dato){
+     return dato.title.toLowerCase().indexOf(titulo.toLowerCase()) > -1;
+  })
+}
+
+function mostrarResultados(datos){
+ 
+  let indexhtml = '';
+ datos.forEach(dato => {
+  console.log(dato);
+  const{title, tagline, vote_average} = dato;
+indexhtml += ` 
+<li>
+    <div> 
+   <h3>${title}</h3>
+    </div>
+</li>
+
+
+`
+ });
+console.log(indexhtml);
+console.log(lista);
+lista.innerHTML = indexhtml;
+
+
+}
