@@ -26,7 +26,25 @@ main {
 .offcanvas-top{
     height: fit-content;
 }
-h3{
-    color: rgb(250, 0, 246);
+.result{
+    color: rgb(0, 162, 255);
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    padding-top: 3px;
+}
 
+.result p{
+    color: white;
+}
+
+.stars{
+    text-align: center;
+}
+
+.color{
+    color: white;
+}
+
+span {
+    margin-left: 3px;
 }
