@@ -48,3 +48,16 @@ main {
 span {
     margin-left: 3px;
 }
+
+.offcanvas{
+    background-color: #3b3c3f;
+    cursor: default;
+}
+
+.offcanvas-body{
+    color: white;
+}
+
+.btn-close{
+    background-color: orange;
+}
