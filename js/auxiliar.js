@@ -67,34 +67,39 @@ function mostrarResultados(datos){
   const { title, tagline, vote_average, overview, id } = dato;
   indexhtml += ` 
     <li>
+    <div class="box">
       <div class="result row" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop${id}" aria-controls="offcanvasTop">
-        <div class="col-9">
+        <div class="col-9 text">
           <h3>${title}</h3>
           <p>${tagline}</p>
         </div>
         <div class="col-3 stars">${cantidadEstrellas(vote_average)}</div>
+        </div>
 
-        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop${id}" data-bs-scroll="true" aria-labelledby="offcanvasTopLabel${id}">
-          <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasTopLabel${id}">${title}</h5>
+      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop${id}" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h4 class="offcanvas-title colort" id="offcanvasExampleLabel">${title}</h4>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+          <div>
           ${overview}
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  More...
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </div>
+          </div>
+          <br>
+          <h6 class="color">${recorrerGenres(dato.genres)}</h6>
         </div>
-        <h6 class="offcanvas-body">${recorrerGenres(dato.genres)}</h6>
+        <div class="dropdown mt-3" id="boton">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          MORE
+        </button>
+        <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
       </div>
-
+      </div>
+      </div>
     </li>`;
   });
 

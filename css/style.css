@@ -28,8 +28,6 @@ main {
 }
 .result{
     color: rgb(0, 162, 255);
-    border: 1px solid gray;
-    margin-bottom: 5px;
     padding-top: 3px;
 }
 
@@ -38,9 +36,14 @@ main {
 }
 
 .stars{
-    text-align: center;
+   
+    text-align: right;
+    padding-right: 30px;
 }
 
+.colort{
+    color: rgb(244, 235, 182);
+}
 .color{
     color: white;
 }
@@ -60,4 +63,26 @@ span {
 
 .btn-close{
     background-color: orange;
+}
+
+.box{
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    padding-top: 3px;
+}
+
+#boton{ 
+    text-align: right;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    
+}
+
+.left{ 
+    text-align: left;
+    
+}
+
+.text{
+    padding-left: 25px;
 }
