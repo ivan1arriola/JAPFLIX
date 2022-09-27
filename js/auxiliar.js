@@ -34,10 +34,11 @@ function filtrar(datos, input) {
 
 function cantidadEstrellas(amount) {
   let stars = "";
-  let starsValue = Math.round(amount / 2);
+  let starsValue = Math.round(amount) / 2;
+  let half = starsValue - Math.floor(starsValue);
 
   for (let i = 0; i < 5; i++) {
-    stars += `<span class="fa fa-star ${i < starsValue ? `checked`: ``}"></span>`;
+    stars += `<span class="fa fa-star ${i < starsValue ? (i+half == starsValue)? `fa-star-half-o`: `checked` : `fa-star-o`}"></span>`;
   }
   return stars;
 }
@@ -84,9 +85,9 @@ function mostrarResultados(datos) {
           MORE
         </button>
         <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item">${release_date}</a></li>
+              <li><a class="dropdown-item">${runtime}</a></li>
+              <li><a class="dropdown-item">${revenue}</a></li>
         </ul>
       </div>
       </div>
