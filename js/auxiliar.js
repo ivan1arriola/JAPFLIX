@@ -1,5 +1,5 @@
 
-//--------------Funciones Auxiliares------------------------
+//Funciones Auxiliares
 
 /**
  * Hace GET a url, obtiene un JSON y devuelve un objeto
