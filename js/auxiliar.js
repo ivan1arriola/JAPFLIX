@@ -97,6 +97,7 @@ function mostrarResultados(lista, datos) {
       revenue,
       runtime,
       genres,
+      budget,
     } = dato;
     indexhtml += ` 
     <li>
@@ -122,14 +123,17 @@ function mostrarResultados(lista, datos) {
           <br>
           <h6 class="color">${recorrerGenres(genres)}</h6>
         </div>
+
         <div class="dropdown mt-3" id="boton">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+
           MORE
         </button>
         <ul class="dropdown-menu">
-              <li><a class="dropdown-item">${release_date}</a></li>
-              <li><a class="dropdown-item">${runtime}</a></li>
-              <li><a class="dropdown-item">${revenue}</a></li>
+              <li><a class="dropdown-item"> Year: ${release_date.slice(0,4)}</a></li>
+              <li><a class="dropdown-item">  Runtime:  ${runtime} mins </a></li>
+              <li><a class="dropdown-item"> Budget: $  ${budget}  </a></li>
+              <li><a class="dropdown-item">Revenue: $ ${revenue}</a></li>
         </ul>
       </div>
       </div>
