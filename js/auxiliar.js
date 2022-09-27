@@ -1,27 +1,37 @@
-//--------------Constantes------------------------------
-const URL = "https://japceibal.github.io/japflix_api/movies-data.json";
 
 //--------------Funciones Auxiliares------------------------
 
-//  Hace GET, obtiene un JSON y devuelve un objeto
+/**
+ * Hace GET a url, obtiene un JSON y devuelve un objeto
+ * @param {String} url
+ * @return {Object}
+ */  
 async function getData(url) {
-  return fetch(url).then((response) => response.json());
+  return fetch(url).then(async (response) => await response.json());
 }
 
-function filterGender(gender, input) {
-  //gender === array of objects [{}]
+/**
+ * @param {Array} genres  arreglo de generos de peliculas - Objetos [{}]
+ * @param {String} input valor digitado en buscador
+ * @returns {Boolean} booleano que indica si input esta contenido en genres[i].name
+ */
+function filterGender(genres, input) {
   let genderFound = false;
-  for (let i = 0; i < gender.length; i++) {
-    genderFound =
-      gender[i].name.toLowerCase().indexOf(input.toLowerCase()) > -1;
-    // if encuentra al menos un genero que contiene el input, devolvemos genderFound y paramos el for
-    //if (genderFound) break;
+  for (let i = 0; i < genres.length; i++) {
+    genderFound = genres[i].name.toLowerCase().includes(input.toLowerCase());
+    if (genderFound) break; // si encuentra al menos un genero que contiene el input, entra en el if y paramos el for
   }
   return genderFound;
 }
 
-function filtrar(datos, input) {
-  return datos.filter(function (dato) {
+/**
+ * @param {Array} films arreglo films de peliculas
+ * @param {String} input valor digitado en buscador
+ * @returns {Array} arreglo de las peliculas que cumplen
+ * con la condicion de que input esté dentro de sus atributos : title, genres, tagline, overview.
+ */
+function filtrar(films, input) {
+  return films.filter(function (dato) {
     const { title, genres, tagline, overview } = dato;
     return (
       title.toLowerCase().indexOf(input.toLowerCase()) > -1 ||
@@ -32,20 +42,36 @@ function filtrar(datos, input) {
   });
 }
 
-function cantidadEstrellas(amount) {
+/**
+* Se le pasa un numero real  n y devuelve un string de 5 estrellas 
+* @param {Number} n
+* @returns {String}
+*/
+function cantidadEstrellas(n) {
   let stars = "";
-  let starsValue = Math.round(amount) / 2;
-  let half = starsValue - Math.floor(starsValue);
+  let starsValue = Math.round(n) / 2;
+  let half = starsValue - Math.floor(starsValue); // vale 0 ó 0.5
 
   for (let i = 0; i < 5; i++) {
-    stars += `<span class="fa fa-star ${i < starsValue ? (i+half == starsValue)? `fa-star-half-o`: `checked` : `fa-star-o`}"></span>`;
+    stars += `<span class="fa fa-star ${
+      i < starsValue
+        ? i + half == starsValue
+          ? `fa-star-half-o`
+          : `checked`
+        : `fa-star-o`
+    }"></span>`;
   }
   return stars;
 }
 
-function recorrerGenres(array) {
+/**
+* Se le pasa arreglo con generos de peliculas genresArray y lo transforma en texto HTML
+* @param {Array} genresArray
+* @returns {String} HTML
+*/
+function recorrerGenres(genresArray) {
   let result = "";
-  for (const gender of array) {
+  for (const gender of genresArray) {
     result += gender.name + ", ";
   }
   // le cortamos los ultimos 2 caracteres ", "
@@ -53,10 +79,25 @@ function recorrerGenres(array) {
   return result;
 }
 
-function mostrarResultados(datos) {
+
+/**
+* Se le pasa un elemento HTML @param {object} lista , y un arreglo de objetos @param {Array} datos
+* y los despliega en el html
+*/
+function mostrarResultados(lista, datos) {
   let indexhtml = "";
   datos.forEach((dato) => {
-    const { title, tagline, vote_average, overview, id, release_date, revenue, runtime, genres } = dato;
+    const {
+      title,
+      tagline,
+      vote_average,
+      overview,
+      id,
+      release_date,
+      revenue,
+      runtime,
+      genres,
+    } = dato;
     indexhtml += ` 
     <li>
     <div class="box">
@@ -65,8 +106,9 @@ function mostrarResultados(datos) {
           <h3>${title}</h3>
           <p>${tagline}</p>
         </div>
-        <div class="col-3 stars">${cantidadEstrellas(vote_average)}</div>
+        <div class="col-3 stars">${cantidadEstrellas(vote_average)}
         </div>
+      </div>
 
       <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop${id}" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
